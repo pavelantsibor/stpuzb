@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Розыгрыш шумоизоляции авто</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000000 0%, #1a0000 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2vh 3vw;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1vh 0;
+            margin-bottom: 1vh;
+            flex-wrap: wrap;
+            gap: 2vh;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 2vw;
+            flex-wrap: wrap;
+        }
+
+        .logo-icon {
+            max-width: min(220px, 14vw);
+            height: auto;
+            width: min(220px, 14vw);
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(40px, 6vw, 80px);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        }
+
+        .logo-text {
+            font-size: clamp(32px, 4.5vw, 68px);
+            font-weight: 700;
+            text-align: left;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            text-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
+            white-space: nowrap;
+        }
+
+        .prize-text {
+            font-size: clamp(18px, 2.5vw, 36px);
+            font-weight: 800;
+            background: rgba(0, 0, 0, 0.85);
+            color: #ffffff;
+            padding: clamp(12px, 1.8vh, 22px) clamp(24px, 3.5vw, 54px);
+            border-radius: 12px;
+            border: 3px solid #e74c3c;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            white-space: nowrap;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            font-size: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
+            padding: clamp(16px, 2vh, 28px) clamp(28px, 4vw, 56px);
+            border-radius: 20px;
+            border: 3px solid #e74c3c;
+            min-width: clamp(160px, 18vw, 280px);
+            color: #ffffff;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-value {
+            font-size: clamp(36px, 4.5vw, 68px);
+            font-weight: 700;
+            color: #e74c3c;
+            text-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+        }
+
+        .roulette-container {
+            width: 100%;
+            height: clamp(200px, 20vh, 320px);
+            position: relative;
+            margin: 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
+            border-radius: 25px;
+            border: 4px solid #e74c3c;
+            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.4);
+            overflow: hidden;
+            will-change: box-shadow;
+        }
+        
+        .roulette-container.spinning {
+            box-shadow: 0 8px 40px rgba(231, 76, 60, 0.7);
+        }
+        
+        .roulette-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                        rgba(0,0,0,0.7) 0%, 
+                        transparent 25%, 
+                        transparent 75%, 
+                        rgba(0,0,0,0.7) 100%);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .roulette-strip {
+            display: flex;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .number-block {
+            width: clamp(140px, 15vw, 220px);
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: clamp(52px, 8vw, 96px);
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            border-right: 3px solid rgba(0, 0, 0, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: translateZ(0);
+        }
+
+        .number-block.highlight {
+            background: linear-gradient(135deg, #ff6b5a 0%, #e74c3c 100%);
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(231, 76, 60, 1);
+            z-index: 10;
+        }
+
+        .roulette-pointer {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            width: 10px;
+            background: linear-gradient(180deg, #ffffff 0%, #e74c3c 50%, #ffffff 100%);
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.8);
+        }
+
+        .roulette-pointer::before, .roulette-pointer::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+        }
+
+        .roulette-pointer::before {
+            top: -2px;
+            border-top: 50px solid #ffffff;
+        }
+
+        .roulette-pointer::after {
+            bottom: -2px;
+            border-bottom: 50px solid #ffffff;
+        }
+
+        .controls {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+            opacity: 0.25;
+            transition: opacity 0.3s ease;
+            max-width: 280px;
+        }
+        
+        .controls:hover {
+            opacity: 1;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(42, 0, 0, 0.95) 100%);
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(231, 76, 60, 0.5);
+        }
+
+        .control-title {
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .participants-control {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            color: #ffffff;
+            font-size: 10px;
+        }
+
+        .participants-control input {
+            width: 60px;
+            padding: 4px 8px;
+            font-size: 11px;
+            border: 1px solid rgba(231, 76, 60, 0.5);
+            border-radius: 4px;
+            text-align: center;
+            background: rgba(42, 42, 42, 0.8);
+            color: #ffffff;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            font-size: 10px;
+            font-weight: 900;
+            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(20,20,20,0.95) 100%);
+            color: white;
+            border: 2px solid #e74c3c;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: linear-gradient(180deg, rgba(60,60,60,0.8) 0%, rgba(45,45,45,0.8) 100%);
+            border-color: rgba(231,76,60,0.4);
+            opacity: 0.6;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        .timer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: clamp(20px, 4vh, 40px) 0;
+            width: 100%;
+            position: relative;
+        }
+
+        .timer-title {
+            font-size: clamp(32px, 5.5vw, 88px);
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: clamp(20px, 3vh, 40px);
+            text-align: center;
+            letter-spacing: 0.08em;
+            text-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
+        }
+
+        .timer-display {
+            font-size: clamp(120px, 22vw, 380px);
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 60px rgba(231, 76, 60, 0.9),
+                         0 0 120px rgba(231, 76, 60, 0.6);
+            height: clamp(140px, 26vh, 420px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: clamp(10px, 2vh, 20px) 0;
+            position: relative;
+            will-change: transform;
+        }
+        
+        .timer-display.tick-animation {
+            animation: timerTick 0.4s ease-out;
+        }
+        
+        @keyframes timerTick {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.06); }
+            100% { transform: scale(1); }
+        }
+        
+        .timer-display.critical {
+            animation: criticalPulse 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes criticalPulse {
+            0%, 100% {
+                transform: scale(1);
+                color: #ffffff;
+            }
+            50% {
+                transform: scale(1.05);
+                color: #ff4444;
+            }
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
+            padding: clamp(50px, 6vh, 80px);
+            border-radius: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1001;
+            transform: scale(0.5);
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            max-width: 90%;
+            width: clamp(600px, 60vw, 1000px);
+            border: 4px solid #e74c3c;
+            box-shadow: 0 10px 50px rgba(231, 76, 60, 0.5);
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-size: clamp(40px, 5vw, 72px);
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(231, 76, 60, 0.8);
+        }
+
+        .modal-winner {
+            font-size: clamp(140px, 18vw, 320px);
+            font-weight: 900;
+            color: #ffffff;
+            margin: 30px 0;
+            text-shadow: 0 0 40px rgba(231, 76, 60, 0.8),
+                         0 0 80px rgba(231, 76, 60, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .modal-subtitle {
+            font-size: clamp(28px, 3.5vw, 52px);
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 35px;
+        }
+
+        .modal-btn {
+            padding: clamp(16px, 2vh, 24px) clamp(40px, 5vw, 70px);
+            font-size: clamp(20px, 2.5vw, 36px);
+            font-weight: bold;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn:hover {
+            background: linear-gradient(135deg, #ff6b5a 0%, #e74c3c 100%);
+            transform: translateY(-2px);
+        }
+
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1002;
+            will-change: transform, opacity;
+        }
+
+        .winner-info {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: clamp(20px, 3vh, 35px) clamp(40px, 5vw, 70px);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
+            border-radius: 20px;
+            border: 3px solid #e74c3c;
+            max-width: 90%;
+            text-align: center;
+            display: none;
+            box-shadow: 0 6px 30px rgba(231, 76, 60, 0.5);
+            z-index: 50;
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                bottom: -100px;
+                opacity: 0;
+            }
+            to {
+                bottom: 40px;
+                opacity: 1;
+            }
+        }
+
+        .winner-number {
+            font-size: clamp(36px, 4.5vw, 64px);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+            text-shadow: 0 0 20px rgba(231, 76, 60, 1);
+        }
+
+        .winner-text {
+            font-size: clamp(24px, 3vw, 42px);
+            color: #ffffff;
+        }
+
+        .firework-particle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1003;
+            box-shadow: 0 0 10px rgba(255,255,255,0.6);
+            will-change: transform, opacity;
+        }
+
+        @media (min-width: 1900px) and (max-width: 1940px) {
+            .controls { right: 30px; opacity: 0.3; }
+            .roulette-container { height: 280px; }
+            .timer-display { height: 400px; }
+            .number-block { width: 180px; font-size: 72px; }
+        }
+
+        @media (min-width: 2560px) {
+            .logo-icon { max-width: 280px; }
+            .logo-text { font-size: 88px; }
+            .prize-text { font-size: 48px; padding: 28px 70px; }
+            .stat-value { font-size: 88px; }
+            .roulette-container { height: 380px; }
+            .number-block { width: 260px; font-size: 112px; }
+            .timer-title { font-size: 140px; }
+            .timer-display { font-size: 520px; height: 580px; }
+            .modal-winner { font-size: 400px; }
+            .modal-title { font-size: 96px; }
+            .modal-subtitle { font-size: 68px; }
+            .controls { right: 40px; max-width: 320px; }
+            .control-title { font-size: 14px; }
+            .btn { font-size: 13px; padding: 8px 16px; }
+            footer { font-size: 16px; }
+        }
+
+        @media (min-aspect-ratio: 21/9) {
+            .container { max-width: 85vw; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">🏆</div>
+                <div class="logo-text">Стандартпласт</div>
+                <div class="prize-text">Главный приз: шумоизоляция дверей автомобиля</div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div>УЧАСТНИКОВ</div>
+                    <div class="stat-value" id="participantsCount">250</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="timer-container" id="timerContainer">
+            <div class="timer-title">ДО ОКОНЧАНИЯ РОЗЫГРЫША</div>
+            <div class="timer-display" id="timer">10</div>
+        </div>
+
+        <div class="roulette-container">
+            <div class="roulette-strip" id="rouletteStrip"></div>
+            <div class="roulette-pointer"></div>
+        </div>
+        
+        <div class="winner-info" id="winnerInfo">
+            <div class="winner-number">Победитель: <span id="winnerNumber">-</span></div>
+            <div class="winner-text">Участник №<span id="winnerId">-</span> выиграл шумоизоляцию дверей автомобиля</div>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <h2 class="control-title">👥 Управление участниками</h2>
+                <div class="participants-control">
+                    <label for="participantsInput">Количество:</label>
+                    <input type="number" id="participantsInput" min="10" max="500" value="250">
+                    <button class="btn" id="updateBtn">🔄 Обновить</button>
+                </div>
+                <div class="participants-control">
+                    <button class="btn" id="addBtn">➕ Добавить 10</button>
+                    <button class="btn" id="removeBtn">➖ Убрать 10</button>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h2 class="control-title">🎮 Управление рулеткой</h2>
+                <button class="btn" id="spinBtn">▶️ Запустить рулетку</button>
+                <button class="btn" id="stopBtn" style="margin-top: 12px; background: #c0392b;">⏹️ Остановить досрочно</button>
+            </div>
+            
+            <div class="control-group">
+                <h2 class="control-title">📺 Режим отображения</h2>
+                <button class="btn" id="fullscreenBtn">⛶ Полный экран</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>Розыгрыш шумоизоляции для дверей автомобиля © 2025 | Все права защищены</p>
+        </footer>
+    </div>
+
+    <div class="modal-overlay" id="winnerModal">
+        <div class="modal-content">
+            <div class="modal-title">ПОБЕДИТЕЛЬ РОЗЫГРЫША!</div>
+            <div class="modal-winner" id="modalWinnerNumber">-</div>
+            <div class="modal-subtitle">Участник №<span id="modalWinnerId">0</span> выиграл шумоизоляцию дверей автомобиля</div>
+            <button class="modal-btn" id="closeModalBtn">Закрыть</button>
+        </div>
+    </div>
+
+    <audio id="winSound" preload="auto">
+        <source src="WIN.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const rouletteStrip = document.getElementById('rouletteStrip');
+            const spinBtn = document.getElementById('spinBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const updateBtn = document.getElementById('updateBtn');
+            const addBtn = document.getElementById('addBtn');
+            const removeBtn = document.getElementById('removeBtn');
+            const participantsInput = document.getElementById('participantsInput');
+            const participantsCount = document.getElementById('participantsCount');
+            const timerDisplay = document.getElementById('timer');
+            const timerContainer = document.getElementById('timerContainer');
+            const winnerModal = document.getElementById('winnerModal');
+            const modalWinnerNumber = document.getElementById('modalWinnerNumber');
+            const modalWinnerId = document.getElementById('modalWinnerId');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const winnerInfo = document.getElementById('winnerInfo');
+            const winnerNumber = document.getElementById('winnerNumber');
+            const winnerId = document.getElementById('winnerId');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const winSound = document.getElementById('winSound');
+            
+            let participants = 250;
+            let isSpinning = false;
+            let animationId = null;
+            let timerId = null;
+            let spinStartTime = 0;
+            const spinDuration = 10000;
+            const blockWidth = window.innerWidth < 2560 ? 160 : 260;
+            const speedFactor = 15.0;
+            let winner = null;
+            let timeLeft = 10;
+            let participantNumbers = [];
+            let virtualPosition = 0;
+            let cycleWidth = 0;
+            let totalCycles = 0;
+            let isSlowingDown = false;
+            
+            function initializeRoulette() {
+                rouletteStrip.innerHTML = '';
+                participantsCount.textContent = participants;
+                
+                participantNumbers = Array.from({length: participants}, (_, i) => i + 1);
+                shuffleArray(participantNumbers);
+                
+                const maxElements = 1500;
+                const neededForDistance = Math.ceil(25000 / (participants * blockWidth));
+                const maxForPerformance = Math.ceil(maxElements / participants);
+                totalCycles = Math.min(Math.max(neededForDistance, 15), maxForPerformance);
+                
+                const fragment = document.createDocumentFragment();
+                for (let i = 0; i < totalCycles; i++) {
+                    participantNumbers.forEach(num => {
+                        const block = document.createElement('div');
+                        block.className = 'number-block';
+                        block.textContent = num;
+                        block.dataset.number = num;
+                        fragment.appendChild(block);
+                    });
+                }
+                rouletteStrip.appendChild(fragment);
+                
+                cycleWidth = participants * blockWidth;
+                virtualPosition = cycleWidth * 3;
+                winnerInfo.style.display = 'none';
+                updateRoulettePosition();
+            }
+            
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+            
+            function updateRoulettePosition() {
+                if (!isSlowingDown && virtualPosition > cycleWidth * (totalCycles - 8)) {
+                    virtualPosition -= cycleWidth * 4;
+                }
+                rouletteStrip.style.transform = `translateX(${-virtualPosition}px)`;
+            }
+            
+            function startSpinning() {
+                if (isSpinning) return;
+                
+                isSpinning = true;
+                spinBtn.disabled = true;
+                winner = null;
+                timeLeft = 10;
+                timerDisplay.textContent = timeLeft;
+                winnerInfo.style.display = 'none';
+                isSlowingDown = false;
+                
+                document.querySelector('.roulette-container').classList.add('spinning');
+                document.querySelectorAll('.number-block.highlight').forEach(el => {
+                    el.classList.remove('highlight');
+                });
+                
+                spinStartTime = Date.now();
+                startTimer();
+                
+                function animate() {
+                    if (!isSpinning) return;
+                    
+                    const elapsed = Date.now() - spinStartTime;
+                    const progress = Math.min(elapsed / spinDuration, 1);
+                    
+                    let speed = speedFactor;
+                    if (progress > 0.8) {
+                        isSlowingDown = true;
+                        speed = speedFactor * (1 - (progress - 0.8) / 0.2);
+                    } else {
+                        isSlowingDown = false;
+                    }
+                    
+                    virtualPosition += speed;
+                    updateRoulettePosition();
+                    
+                    if (elapsed >= spinDuration) {
+                        stopSpinning();
+                        return;
+                    }
+                    
+                    animationId = requestAnimationFrame(animate);
+                }
+                
+                animate();
+            }
+            
+            function startTimer() {
+                if (timerId) clearInterval(timerId);
+                
+                timerId = setInterval(() => {
+                    timeLeft--;
+                    timerDisplay.classList.remove('tick-animation');
+                    timerDisplay.classList.remove('critical');
+                    void timerDisplay.offsetWidth;
+                    timerDisplay.textContent = timeLeft;
+                    timerDisplay.classList.add('tick-animation');
+                    
+                    if (timeLeft <= 5 && timeLeft > 0) {
+                        setTimeout(() => {
+                            timerDisplay.classList.remove('tick-animation');
+                            timerDisplay.classList.add('critical');
+                        }, 400);
+                    }
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timerId);
+                        timerDisplay.classList.remove('tick-animation');
+                        timerDisplay.classList.remove('critical');
+                    }
+                }, 1000);
+            }
+            
+            function calculateWinner() {
+                const container = document.querySelector('.roulette-container');
+                const containerRect = container.getBoundingClientRect();
+                const containerWidth = containerRect.width;
+                const centerX = containerWidth / 2;
+                const blocks = Array.from(document.querySelectorAll('.number-block'));
+                
+                let closestBlock = null;
+                let minDistance = Infinity;
+                
+                blocks.forEach(block => {
+                    const blockRect = block.getBoundingClientRect();
+                    const containerLeft = containerRect.left;
+                    const blockCenterX = blockRect.left + blockRect.width / 2 - containerLeft;
+                    const distance = Math.abs(blockCenterX - centerX);
+                    
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestBlock = block;
+                    }
+                });
+                
+                return closestBlock ? parseInt(closestBlock.dataset.number) : participantNumbers[0];
+            }
+            
+            function stopSpinning() {
+                if (!isSpinning) return;
+                
+                isSpinning = false;
+                cancelAnimationFrame(animationId);
+                spinBtn.disabled = false;
+                clearInterval(timerId);
+                
+                document.querySelector('.roulette-container').classList.remove('spinning');
+                timerDisplay.classList.remove('tick-animation');
+                timerDisplay.classList.remove('critical');
+                
+                winner = calculateWinner();
+                
+                setTimeout(() => {
+                    modalWinnerNumber.textContent = winner;
+                    modalWinnerId.textContent = winner;
+                    winnerModal.classList.add('active');
+                    
+                    winSound.currentTime = 0;
+                    winSound.play().catch(err => {
+                        console.log('Автовоспроизведение заблокировано:', err);
+                    });
+                    
+                    winnerNumber.textContent = winner;
+                    winnerId.textContent = winner;
+                    winnerInfo.style.display = 'block';
+                    createConfetti();
+                }, 600);
+                
+                const blocks = document.querySelectorAll('.number-block');
+                for (let block of blocks) {
+                    if (parseInt(block.dataset.number) === winner) {
+                        block.classList.add('highlight');
+                    }
+                }
+            }
+            
+            function createConfetti() {
+                const colors = ['#e74c3c', '#ffffff', '#f1c40f', '#ff6b5a'];
+                
+                for (let i = 0; i < 100; i++) {
+                    setTimeout(() => {
+                        const confetti = document.createElement('div');
+                        confetti.className = 'confetti';
+                        confetti.style.left = Math.random() * 100 + 'vw';
+                        confetti.style.top = '-10px';
+                        confetti.style.width = Math.random() * 10 + 6 + 'px';
+                        confetti.style.height = Math.random() * 10 + 6 + 'px';
+                        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                        document.body.appendChild(confetti);
+                        
+                        const swingAmplitude = Math.random() * 150 - 75;
+                        const animation = confetti.animate([
+                            { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+                            { transform: `translate(${swingAmplitude}px, ${window.innerHeight + 20}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                        ], {
+                            duration: Math.random() * 2500 + 2500,
+                            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                        });
+                        
+                        animation.onfinish = () => confetti.remove();
+                    }, i * 20);
+                }
+                
+                for (let i = 0; i < 40; i++) {
+                    setTimeout(() => {
+                        const star = document.createElement('div');
+                        star.className = 'confetti';
+                        star.style.left = '50vw';
+                        star.style.top = '50vh';
+                        star.style.width = '16px';
+                        star.style.height = '16px';
+                        star.style.backgroundColor = '#ffffff';
+                        star.style.borderRadius = '50%';
+                        star.style.boxShadow = '0 0 20px #ffffff';
+                        document.body.appendChild(star);
+                        
+                        const angle = (Math.PI * 2 * i) / 40;
+                        const distance = Math.random() * 500 + 300;
+                        const endX = Math.cos(angle) * distance;
+                        const endY = Math.sin(angle) * distance;
+                        
+                        const animation = star.animate([
+                            { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+                            { transform: `translate(calc(-50% + ${endX}px), calc(-50% + ${endY}px)) scale(0)`, opacity: 0 }
+                        ], {
+                            duration: Math.random() * 1200 + 800,
+                            easing: 'cubic-bezier(0, 0.5, 0.5, 1)'
+                        });
+                        
+                        animation.onfinish = () => star.remove();
+                    }, i * 15);
+                }
+            }
+            
+            function updateParticipants() {
+                const newCount = parseInt(participantsInput.value);
+                if (newCount >= 10 && newCount <= 500) {
+                    participants = newCount;
+                    participantsInput.value = participants;
+                    initializeRoulette();
+                } else {
+                    alert('Количество участников должно быть от 10 до 500');
+                    participantsInput.value = participants;
+                }
+            }
+            
+            function addParticipants() {
+                participants = Math.min(500, participants + 10);
+                participantsInput.value = participants;
+                initializeRoulette();
+            }
+            
+            function removeParticipants() {
+                participants = Math.max(10, participants - 10);
+                participantsInput.value = participants;
+                initializeRoulette();
+            }
+            
+            function closeModal() {
+                winnerModal.classList.remove('active');
+                stopFireworks();
+            }
+            
+            function toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement.requestFullscreen();
+                    } else if (document.documentElement.webkitRequestFullscreen) {
+                        document.documentElement.webkitRequestFullscreen();
+                    } else if (document.documentElement.msRequestFullscreen) {
+                        document.documentElement.msRequestFullscreen();
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                }
+            }
+            
+            function updateFullscreenButton() {
+                const isFullscreen = document.fullscreenElement || 
+                                   document.webkitFullscreenElement || 
+                                   document.msFullscreenElement;
+                
+                if (isFullscreen) {
+                    fullscreenBtn.innerHTML = '⛶ Выйти';
+                    fullscreenBtn.style.background = 'linear-gradient(180deg, #c0392b 0%, #a93226 100%)';
+                } else {
+                    fullscreenBtn.innerHTML = '⛶ Полный экран';
+                    fullscreenBtn.style.background = 'linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(20,20,20,0.95) 100%)';
+                }
+            }
+            
+            spinBtn.addEventListener('click', startSpinning);
+            stopBtn.addEventListener('click', stopSpinning);
+            updateBtn.addEventListener('click', updateParticipants);
+            addBtn.addEventListener('click', addParticipants);
+            removeBtn.addEventListener('click', removeParticipants);
+            closeModalBtn.addEventListener('click', closeModal);
+            fullscreenBtn.addEventListener('click', toggleFullscreen);
+            
+            document.addEventListener('fullscreenchange', updateFullscreenButton);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+            document.addEventListener('msfullscreenchange', updateFullscreenButton);
+            
+            winnerModal.addEventListener('click', (e) => {
+                if (e.target === winnerModal) {
+                    closeModal();
+                }
+            });
+            
+            participantsInput.addEventListener('change', updateParticipants);
+            
+            initializeRoulette();
+            updateFullscreenButton();
+
+            let fireworksIntervalId = null;
+            function startFireworks() {
+                if (fireworksIntervalId) return;
+                fireworksIntervalId = setInterval(() => {
+                    launchFirework();
+                }, 1200);
+            }
+            
+            function stopFireworks() {
+                if (fireworksIntervalId) {
+                    clearInterval(fireworksIntervalId);
+                    fireworksIntervalId = null;
+                }
+            }
+            
+            function launchFirework() {
+                const cx = Math.random() * window.innerWidth * 0.7 + window.innerWidth * 0.15;
+                const cy = Math.random() * window.innerHeight * 0.4 + window.innerHeight * 0.2;
+                const colors = ['#ffffff', '#e74c3c', '#ff6b5a', '#f1c40f'];
+                const particles = 25;
+                for (let i = 0; i < particles; i++) {
+                    const p = document.createElement('div');
+                    p.className = 'firework-particle';
+                    p.style.width = '10px';
+                    p.style.height = '10px';
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    p.style.background = color;
+                    p.style.left = cx + 'px';
+                    p.style.top = cy + 'px';
+                    p.style.boxShadow = `0 0 12px ${color}`;
+                    document.body.appendChild(p);
+                    const angle = (Math.PI * 2 * i) / particles;
+                    const distance = Math.random() * 220 + 120;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance;
+                    const duration = Math.random() * 1000 + 1200;
+                    const keyframes = [
+                        { transform: 'translate(0,0) scale(1)', opacity: 1 },
+                        { transform: `translate(${tx}px, ${ty}px) scale(0.3)`, opacity: 0 }
+                    ];
+                    const anim = p.animate(keyframes, { duration, easing: 'cubic-bezier(0.2,0.6,0.2,1)' });
+                    anim.onfinish = () => p.remove();
+                }
+            }
+
+            const observer = new MutationObserver(() => {
+                const active = winnerModal.classList.contains('active');
+                if (active) {
+                    startFireworks();
+                } else {
+                    stopFireworks();
+                }
+            });
+            observer.observe(winnerModal, { attributes: true, attributeFilter: ['class'] });
+        });
+    </script>
+</body>
+</html>
+
