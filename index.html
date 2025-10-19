@@ -517,17 +517,17 @@
             }
             
             .timer-container { 
-                margin: clamp(8px, 1.5vh, bài 20px) 0; 
+                margin: clamp(8px, 1.5vh, 20px) 0; 
             }
             
             .roulette-container { 
-                height: clamp(144px, 14.4vh, 240px); 
-                margin: clamp(5px, 1vh, 15px) 0;
+                height: clamp(100px, 10vh, 160px) !important; 
+                margin: clamp(3px, 0.5vh, 8px) 0;
             }
             
             .number-block { 
-                width: clamp(120px, 12vw, 160px); 
-                font-size: clamp(28px, 3.5vw, 48px);
+                width: clamp(80px, 8vw, 120px) !important; 
+                font-size: clamp(18px, 2vw, 32px) !important;
             }
             
             .modal-title { font-size: clamp(24px, 3vw, 40px); }
@@ -542,10 +542,23 @@
             }
             
             .winners-panel {
-                left: 15px;
-                max-width: 350px;
-                min-width: 300px;
-                padding: 15px;
+                left: 10px !important;
+                max-width: 250px !important;
+                min-width: 220px !important;
+                padding: 10px !important;
+            }
+            
+            .winners-title {
+                font-size: 22px !important;
+                margin-bottom: 10px !important;
+            }
+            
+            .winner-text {
+                font-size: 18px !important;
+            }
+            
+            .winner-number {
+                font-size: 20px !important;
             }
             
             header { 
@@ -559,14 +572,14 @@
             .main-title { font-size: clamp(48px, 3vw, 72px); }
             .company-name { font-size: clamp(24px, 2vw, 40px); }
             .timer-display { font-size: clamp(120px, 8vw, 200px); height: clamp(140px, 10vh, 220px); }
-            .roulette-container { height: clamp(216px, 18vh, 288px); }
-            .number-block { width: clamp(160px, 10vw, 180px); font-size: clamp(40px, 3vw, 56px); }
+            .roulette-container { height: clamp(120px, 12vh, 180px) !important; }
+            .number-block { width: clamp(90px, 6vw, 130px) !important; font-size: clamp(20px, 1.8vw, 36px) !important; }
             .modal-winner { font-size: clamp(120px, 8vw, 200px); }
             .controls { right: clamp(20px, 2vw, 30px); max-width: clamp(220px, 18vw, 280px); }
             .winners-panel { 
-                left: 15px; 
-                max-width: 350px;
-                min-width: 300px;
+                left: 12px !important; 
+                max-width: 280px !important;
+                min-width: 240px !important;
             }
         }
 
@@ -574,8 +587,8 @@
             .main-title { font-size: 140px; }
             .company-name { font-size: 88px; }
             .prize-text { font-size: 48px; padding: 20px 60px; }
-            .roulette-container { height: 576px; }
-            .number-block { width: 300px; font-size: 140px; }
+            .roulette-container { height: clamp(140px, 8vh, 200px) !important; }
+            .number-block { width: clamp(100px, 4vw, 140px) !important; font-size: clamp(22px, 1.5vw, 40px) !important; }
             .timer-display { font-size: 600px; height: 640px; }
             .modal-winner { font-size: 450px; }
             .modal-title { font-size: 110px; }
@@ -584,6 +597,11 @@
             .control-title { font-size: 14px; }
             .btn { font-size: 13px; padding: 8px 16px; }
             footer { font-size: 16px; }
+            .winners-panel {
+                left: 15px !important;
+                max-width: 320px !important;
+                min-width: 280px !important;
+            }
         }
 
         @media (min-aspect-ratio: 21/9) {
