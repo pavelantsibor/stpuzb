@@ -52,7 +52,7 @@
         }
 
         .main-title {
-            font-size: clamp(32px, 4vw, 64px);
+            font-size: clamp(24px, 3vw, 48px);
             font-weight: 900;
             color: #ffffff;
             text-transform: uppercase;
@@ -62,7 +62,7 @@
         
 
         .company-name {
-            font-size: clamp(28px, 3.5vw, 56px);
+            font-size: clamp(18px, 2.5vw, 36px);
             font-weight: 700;
             color: #ffffff;
             letter-spacing: 0.08em;
@@ -71,11 +71,11 @@
         }
 
         .prize-text {
-            font-size: clamp(18px, 2vw, 32px);
+            font-size: clamp(14px, 1.5vw, 24px);
             font-weight: 600;
             color: #ffffff;
             background: rgba(0, 0, 0, 0.6);
-            padding: clamp(8px, 1vh, 16px) clamp(20px, 2.5vw, 40px);
+            padding: clamp(6px, 0.8vh, 12px) clamp(16px, 2vw, 32px);
             border-radius: 12px;
             border: 2px solid rgba(231, 76, 60, 0.5);
             letter-spacing: 0.05em;
@@ -83,9 +83,9 @@
 
         .roulette-container {
             width: 100%;
-            height: clamp(288px, 28.8vh, 540px);
+            height: clamp(120px, 12vh, 200px);
             position: relative;
-            margin: clamp(10px, 2vh, 30px) 0;
+            margin: clamp(5px, 1vh, 15px) 0;
             background: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
             border-radius: 25px;
             border: 4px solid #e74c3c;
@@ -125,12 +125,12 @@
         }
 
         .number-block {
-            width: 200px;
+            width: clamp(80px, 8vw, 120px);
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: clamp(56px, 7vw, 110px);
+            font-size: clamp(18px, 2vw, 32px);
             font-weight: 800;
             color: #ffffff;
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
@@ -287,13 +287,13 @@
         }
 
         .timer-display {
-            font-size: clamp(120px, 18vw, 480px);
+            font-size: clamp(60px, 8vw, 200px);
             font-weight: 900;
             color: #ffffff;
             text-shadow: 0 0 80px rgba(231, 76, 60, 1),
                          0 0 160px rgba(231, 76, 60, 0.8),
                          0 0 240px rgba(231, 76, 60, 0.6);
-            height: clamp(130px, 20vh, 500px);
+            height: clamp(70px, 10vh, 220px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -437,9 +437,9 @@
             left: 15px;
             transform: translateY(0);
             background: transparent;
-            padding: 15px;
-            max-width: 350px;
-            min-width: 300px;
+            padding: 10px;
+            max-width: clamp(200px, 20vw, 300px);
+            min-width: clamp(180px, 18vw, 250px);
             opacity: 0.7;
             transition: opacity 0.3s ease;
             z-index: 80;
@@ -451,24 +451,24 @@
         }
 
         .winners-title {
-            font-size: 32px !important;
-            font-weight: 900 !important;
-            color: #ffffff !important;
+            font-size: clamp(18px, 2vw, 28px);
+            font-weight: 900;
+            color: #ffffff;
             text-transform: uppercase;
-            margin-bottom: 15px !important;
+            margin-bottom: 10px;
             text-align: left;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             white-space: nowrap;
         }
 
         .winner-item {
             display: flex;
             align-items: center;
-            padding: 8px 0 !important;
-            font-size: 28px !important;
-            color: #ffffff !important;
+            padding: 5px 0;
+            font-size: clamp(14px, 1.5vw, 22px);
+            color: #ffffff;
             justify-content: flex-start;
-            font-weight: 700 !important;
+            font-weight: 700;
         }
 
         .winner-item:last-child {
@@ -476,137 +476,19 @@
         }
 
         .winner-text {
-            color: #ffffff !important;
-            font-size: 28px !important;
+            color: #ffffff;
+            font-size: clamp(14px, 1.5vw, 22px);
             line-height: 1.5;
-            font-weight: 700 !important;
+            font-weight: 700;
         }
 
         .winner-number {
-            font-weight: 900 !important;
-            color: #ffd700 !important;
-            margin-left: 8px;
-            font-size: 32px !important;
+            font-weight: 900;
+            color: #ffd700;
+            margin-left: 6px;
+            font-size: clamp(16px, 1.8vw, 26px);
         }
 
-        /* Оптимизация для телевизоров и больших экранов */
-        @media (min-width: 1200px) {
-            body { 
-                padding: 0.5vh 1vw; 
-                font-size: 16px;
-            }
-            
-            .main-title { 
-                font-size: clamp(36px, 4vw, 64px); 
-                margin-bottom: 0.3vh;
-            }
-            
-            .company-name { 
-                font-size: clamp(20px, 2.5vw, 40px); 
-                margin-bottom: 0.2vh;
-            }
-            
-            .prize-text { 
-                font-size: clamp(14px, 1.5vw, 24px); 
-                padding: clamp(6px, 0.8vh, 12px) clamp(16px, 2vw, 32px);
-            }
-            
-            .timer-display { 
-                font-size: clamp(80px, 10vw, 180px); 
-                height: clamp(90px, 12vh, 200px);
-            }
-            
-            .timer-container { 
-                margin: clamp(8px, 1.5vh, 20px) 0; 
-            }
-            
-            .roulette-container { 
-                height: clamp(100px, 10vh, 160px) !important; 
-                margin: clamp(3px, 0.5vh, 8px) 0;
-            }
-            
-            .number-block { 
-                width: clamp(80px, 8vw, 120px) !important; 
-                font-size: clamp(18px, 2vw, 32px) !important;
-            }
-            
-            .modal-title { font-size: clamp(24px, 3vw, 40px); }
-            .modal-winner { font-size: clamp(80px, 10vw, 160px); margin: clamp(12px, 2vh, 20px) 0; }
-            .modal-subtitle { font-size: clamp(16px, 2vw, 28px); margin-bottom: clamp(12px, 2vh, 20px); }
-            .modal-content { padding: clamp(20px, 3vh, 40px); width: clamp(400px, 40vw, 600px); }
-            
-            .controls { 
-                right: clamp(15px, 2vw, 25px); 
-                opacity: 0.15; 
-                max-width: clamp(200px, 20vw, 250px);
-            }
-            
-            .winners-panel {
-                left: 10px !important;
-                max-width: 250px !important;
-                min-width: 220px !important;
-                padding: 10px !important;
-            }
-            
-            .winners-title {
-                font-size: 22px !important;
-                margin-bottom: 10px !important;
-            }
-            
-            .winner-text {
-                font-size: 18px !important;
-            }
-            
-            .winner-number {
-                font-size: 20px !important;
-            }
-            
-            header { 
-                margin-bottom: clamp(0.3vh, 5px, 0.8vh); 
-                padding: clamp(0.3vh, 5px, 0.8vh) 0; 
-            }
-        }
-        
-        /* Дополнительная оптимизация для очень больших экранов */
-        @media (min-width: 1920px) and (max-width: 2559px) {
-            .main-title { font-size: clamp(48px, 3vw, 72px); }
-            .company-name { font-size: clamp(24px, 2vw, 40px); }
-            .timer-display { font-size: clamp(120px, 8vw, 200px); height: clamp(140px, 10vh, 220px); }
-            .roulette-container { height: clamp(120px, 12vh, 180px) !important; }
-            .number-block { width: clamp(90px, 6vw, 130px) !important; font-size: clamp(20px, 1.8vw, 36px) !important; }
-            .modal-winner { font-size: clamp(120px, 8vw, 200px); }
-            .controls { right: clamp(20px, 2vw, 30px); max-width: clamp(220px, 18vw, 280px); }
-            .winners-panel { 
-                left: 12px !important; 
-                max-width: 280px !important;
-                min-width: 240px !important;
-            }
-        }
-
-        @media (min-width: 2560px) {
-            .main-title { font-size: 140px; }
-            .company-name { font-size: 88px; }
-            .prize-text { font-size: 48px; padding: 20px 60px; }
-            .roulette-container { height: clamp(140px, 8vh, 200px) !important; }
-            .number-block { width: clamp(100px, 4vw, 140px) !important; font-size: clamp(22px, 1.5vw, 40px) !important; }
-            .timer-display { font-size: 600px; height: 640px; }
-            .modal-winner { font-size: 450px; }
-            .modal-title { font-size: 110px; }
-            .modal-subtitle { font-size: 72px; }
-            .controls { right: 40px; max-width: 320px; opacity: 0.15; }
-            .control-title { font-size: 14px; }
-            .btn { font-size: 13px; padding: 8px 16px; }
-            footer { font-size: 16px; }
-            .winners-panel {
-                left: 15px !important;
-                max-width: 320px !important;
-                min-width: 280px !important;
-            }
-        }
-
-        @media (min-aspect-ratio: 21/9) {
-            .container { max-width: 85vw; }
-        }
     </style>
 </head>
 <body>
