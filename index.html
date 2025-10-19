@@ -52,7 +52,7 @@
         }
 
         .main-title {
-            font-size: clamp(24px, 3vw, 48px);
+            font-size: clamp(32px, 4vw, 64px);
             font-weight: 900;
             color: #ffffff;
             text-transform: uppercase;
@@ -62,7 +62,7 @@
         
 
         .company-name {
-            font-size: clamp(18px, 2.5vw, 36px);
+            font-size: clamp(24px, 3vw, 48px);
             font-weight: 700;
             color: #ffffff;
             letter-spacing: 0.08em;
@@ -130,7 +130,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: clamp(18px, 2vw, 32px);
+            font-size: clamp(22px, 2.5vw, 40px);
             font-weight: 800;
             color: #ffffff;
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
@@ -166,18 +166,18 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            border-left: 35px solid transparent;
-            border-right: 35px solid transparent;
+            border-left: clamp(15px, 2vw, 25px) solid transparent;
+            border-right: clamp(15px, 2vw, 25px) solid transparent;
         }
 
         .roulette-pointer::before {
             top: -2px;
-            border-top: 50px solid #ffffff;
+            border-top: clamp(20px, 3vh, 35px) solid #ffffff;
         }
 
         .roulette-pointer::after {
             bottom: -2px;
-            border-bottom: 50px solid #ffffff;
+            border-bottom: clamp(20px, 3vh, 35px) solid #ffffff;
         }
 
         .controls {
