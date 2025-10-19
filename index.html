@@ -13,7 +13,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #000000 0%, #1a0000 100%);
+            background: #000000;
             color: #ffffff;
             min-height: 100vh;
             height: 100vh;
@@ -21,9 +21,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2vh 3vw;
+            padding: 1vh 2vw;
             overflow: hidden;
             position: relative;
+            font-family: 'Arial Black', Arial, sans-serif;
         }
         
         body::before {
@@ -33,9 +34,31 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 0, 0, 0.03) 2px,
+                    rgba(255, 0, 0, 0.03) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
@@ -52,96 +75,59 @@
 
         header {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             width: 100%;
             padding: 1vh 0;
             margin-bottom: 1vh;
-            flex-wrap: wrap;
-            gap: 2vh;
+            gap: 0.5vh;
+            text-align: center;
         }
 
-        .logo {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 2vw;
-            flex-wrap: wrap;
-        }
-
-        .logo-icon {
-            max-width: min(220px, 14vw);
-            height: auto;
-            width: min(220px, 14vw);
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(40px, 6vw, 80px);
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
-        }
-
-        .logo-text {
-            font-size: clamp(32px, 4.5vw, 68px);
-            font-weight: 700;
-            text-align: left;
+        .main-title {
+            font-size: clamp(48px, 6vw, 96px);
+            font-weight: 900;
             color: #ffffff;
             text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.5vh;
+            text-shadow: 
+                2px 2px 0px #e74c3c,
+                4px 4px 0px #c0392b,
+                6px 6px 0px #a93226,
+                8px 8px 0px #922b21,
+                10px 10px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            filter: contrast(1.2) brightness(1.1);
+        }
+        
+
+        .company-name {
+            font-size: clamp(28px, 3.5vw, 56px);
+            font-weight: 700;
+            color: #ffffff;
             letter-spacing: 0.08em;
-            text-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
-            white-space: nowrap;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            margin-bottom: 0.3vh;
         }
 
         .prize-text {
-            font-size: clamp(18px, 2.5vw, 36px);
-            font-weight: 800;
-            background: rgba(0, 0, 0, 0.85);
+            font-size: clamp(18px, 2vw, 32px);
+            font-weight: 600;
             color: #ffffff;
-            padding: clamp(12px, 1.8vh, 22px) clamp(24px, 3.5vw, 54px);
+            background: rgba(0, 0, 0, 0.6);
+            padding: clamp(8px, 1vh, 16px) clamp(20px, 2.5vw, 40px);
             border-radius: 12px;
-            border: 3px solid #e74c3c;
-            text-transform: uppercase;
-            letter-spacing: 0.07em;
-            white-space: nowrap;
-        }
-
-        .stats {
-            display: flex;
-            gap: 30px;
-            font-size: 24px;
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
-            padding: clamp(16px, 2vh, 28px) clamp(28px, 4vw, 56px);
-            border-radius: 20px;
-            border: 3px solid #e74c3c;
-            min-width: clamp(160px, 18vw, 280px);
-            color: #ffffff;
-            transition: transform 0.3s ease;
-        }
-        
-        .stat-item:hover {
-            transform: translateY(-3px);
-        }
-
-        .stat-value {
-            font-size: clamp(36px, 4.5vw, 68px);
-            font-weight: 700;
-            color: #e74c3c;
-            text-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+            border: 2px solid rgba(231, 76, 60, 0.5);
+            letter-spacing: 0.05em;
         }
 
         .roulette-container {
             width: 100%;
-            height: clamp(200px, 20vh, 320px);
+            height: clamp(240px, 24vh, 450px);
             position: relative;
-            margin: 0;
+            margin: clamp(10px, 2vh, 30px) 0;
             background: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
             border-radius: 25px;
             border: 4px solid #e74c3c;
@@ -181,14 +167,14 @@
         }
 
         .number-block {
-            width: clamp(140px, 15vw, 220px);
+            width: 200px;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: clamp(52px, 8vw, 96px);
-            font-weight: 700;
-            color: #fff;
+            font-size: clamp(56px, 7vw, 110px);
+            font-weight: 800;
+            color: #ffffff;
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             border-right: 3px solid rgba(0, 0, 0, 0.5);
             border-left: 1px solid rgba(255, 255, 255, 0.1);
@@ -199,10 +185,28 @@
         }
 
         .number-block.highlight {
-            background: linear-gradient(135deg, #ff6b5a 0%, #e74c3c 100%);
+            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 50%, #ff8800 100%);
             transform: scale(1.08);
-            box-shadow: 0 0 20px rgba(231, 76, 60, 1);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 1),
+                        0 0 80px rgba(255, 170, 0, 0.8),
+                        inset 0 0 30px rgba(255, 255, 255, 0.3);
             z-index: 10;
+            animation: highlightPulse 1s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
+                         0 3px 6px rgba(0, 0, 0, 0.7);
+        }
+        
+        @keyframes highlightPulse {
+            0%, 100% {
+                box-shadow: 0 0 40px rgba(255, 215, 0, 1),
+                            0 0 80px rgba(255, 170, 0, 0.8),
+                            inset 0 0 30px rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(255, 255, 0, 1),
+                            0 0 120px rgba(255, 200, 0, 1),
+                            inset 0 0 50px rgba(255, 255, 255, 0.5);
+            }
         }
 
         .roulette-pointer {
@@ -245,7 +249,7 @@
             flex-direction: column;
             gap: 10px;
             z-index: 100;
-            opacity: 0.25;
+            opacity: 0.15;
             transition: opacity 0.3s ease;
             max-width: 280px;
         }
@@ -347,32 +351,28 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: clamp(20px, 4vh, 40px) 0;
+            justify-content: center;
+            margin: clamp(15px, 3vh, 50px) 0;
             width: 100%;
             position: relative;
         }
 
         .timer-title {
-            font-size: clamp(32px, 5.5vw, 88px);
-            color: #ffffff;
-            font-weight: 700;
-            margin-bottom: clamp(20px, 3vh, 40px);
-            text-align: center;
-            letter-spacing: 0.08em;
-            text-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
+            display: none; /* Скрыт по требованию */
         }
 
         .timer-display {
-            font-size: clamp(120px, 22vw, 380px);
+            font-size: clamp(120px, 18vw, 480px);
             font-weight: 900;
             color: #ffffff;
-            text-shadow: 0 0 60px rgba(231, 76, 60, 0.9),
-                         0 0 120px rgba(231, 76, 60, 0.6);
-            height: clamp(140px, 26vh, 420px);
+            text-shadow: 0 0 80px rgba(231, 76, 60, 1),
+                         0 0 160px rgba(231, 76, 60, 0.8),
+                         0 0 240px rgba(231, 76, 60, 0.6);
+            height: clamp(130px, 20vh, 500px);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: clamp(10px, 2vh, 20px) 0;
+            margin: 0;
             position: relative;
             will-change: transform;
         }
@@ -425,7 +425,7 @@
 
         .modal-content {
             background: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
-            padding: clamp(50px, 6vh, 80px);
+            padding: clamp(30px, 4vh, 80px);
             border-radius: 30px;
             text-align: center;
             position: relative;
@@ -433,7 +433,7 @@
             transform: scale(0.5);
             transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             max-width: 90%;
-            width: clamp(600px, 60vw, 1000px);
+            width: clamp(500px, 50vw, 1000px);
             border: 4px solid #e74c3c;
             box-shadow: 0 10px 50px rgba(231, 76, 60, 0.5);
             overflow: hidden;
@@ -444,19 +444,19 @@
         }
 
         .modal-title {
-            font-size: clamp(40px, 5vw, 72px);
+            font-size: clamp(28px, 3.5vw, 72px);
             color: #ffffff;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             letter-spacing: 3px;
             text-shadow: 0 0 20px rgba(231, 76, 60, 0.8);
         }
 
         .modal-winner {
-            font-size: clamp(140px, 18vw, 320px);
+            font-size: clamp(100px, 12vw, 320px);
             font-weight: 900;
             color: #ffffff;
-            margin: 30px 0;
+            margin: 20px 0;
             text-shadow: 0 0 40px rgba(231, 76, 60, 0.8),
                          0 0 80px rgba(231, 76, 60, 0.5);
             position: relative;
@@ -464,15 +464,15 @@
         }
 
         .modal-subtitle {
-            font-size: clamp(28px, 3.5vw, 52px);
+            font-size: clamp(20px, 2.5vw, 52px);
             color: #ffffff;
             font-weight: 600;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
         }
 
         .modal-btn {
-            padding: clamp(16px, 2vh, 24px) clamp(40px, 5vw, 70px);
-            font-size: clamp(20px, 2.5vw, 36px);
+            padding: clamp(12px, 1.5vh, 24px) clamp(30px, 4vw, 70px);
+            font-size: clamp(16px, 2vw, 36px);
             font-weight: bold;
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             color: white;
@@ -494,46 +494,6 @@
             will-change: transform, opacity;
         }
 
-        .winner-info {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: clamp(20px, 3vh, 35px) clamp(40px, 5vw, 70px);
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
-            border-radius: 20px;
-            border: 3px solid #e74c3c;
-            max-width: 90%;
-            text-align: center;
-            display: none;
-            box-shadow: 0 6px 30px rgba(231, 76, 60, 0.5);
-            z-index: 50;
-            animation: slideUp 0.5s ease-out;
-        }
-        
-        @keyframes slideUp {
-            from {
-                bottom: -100px;
-                opacity: 0;
-            }
-            to {
-                bottom: 40px;
-                opacity: 1;
-            }
-        }
-
-        .winner-number {
-            font-size: clamp(36px, 4.5vw, 64px);
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 12px;
-            text-shadow: 0 0 20px rgba(231, 76, 60, 1);
-        }
-
-        .winner-text {
-            font-size: clamp(24px, 3vw, 42px);
-            color: #ffffff;
-        }
 
         .firework-particle {
             position: fixed;
@@ -546,26 +506,101 @@
             will-change: transform, opacity;
         }
 
-        @media (min-width: 1900px) and (max-width: 1940px) {
-            .controls { right: 30px; opacity: 0.3; }
-            .roulette-container { height: 280px; }
-            .timer-display { height: 400px; }
-            .number-block { width: 180px; font-size: 72px; }
+        .winners-panel {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(42, 0, 0, 0.95) 100%);
+            border-radius: 15px;
+            border: 2px solid rgba(231, 76, 60, 0.3);
+            padding: 20px;
+            max-width: 200px;
+            min-width: 180px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            z-index: 80;
+        }
+
+        .winners-panel:hover {
+            opacity: 1;
+            border-color: rgba(231, 76, 60, 0.6);
+        }
+
+        .winners-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .winner-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 12px;
+            color: #ffffff;
+            justify-content: flex-start;
+        }
+
+        .winner-item:last-child {
+            border-bottom: none;
+        }
+
+        .winner-text {
+            color: #ffffff;
+            font-size: 12px;
+            line-height: 1.2;
+        }
+
+        .winner-number {
+            font-weight: 700;
+            color: #ffd700;
+            margin-left: 5px;
+        }
+
+        /* Оптимизация для Full HD (1920x1080) */
+        @media (min-width: 1900px) and (max-width: 1920px) and (min-height: 1000px) and (max-height: 1080px) {
+            .main-title { font-size: 72px; }
+            .company-name { font-size: 48px; }
+            .prize-text { font-size: 22px; padding: 10px 30px; }
+            .timer-display { font-size: 220px; height: 240px; }
+            .timer-container { margin: 15px 0; }
+            .roulette-container { height: 260px; }
+            .number-block { width: 200px; font-size: 72px; }
+            .modal-title { font-size: 52px; }
+            .modal-winner { font-size: 200px; margin: 24px 0; }
+            .modal-subtitle { font-size: 36px; margin-bottom: 24px; }
+            .modal-content { padding: 45px; width: 750px; }
+            .controls { right: 30px; opacity: 0.15; }
+            header { margin-bottom: 0.8vh; padding: 0.8vh 0; }
+        }
+        
+        /* Для широких экранов Full HD+ */
+        @media (min-width: 1920px) and (max-width: 2559px) {
+            .controls { right: 30px; opacity: 0.15; }
+            .roulette-container { height: 270px; }
+            .timer-display { height: 250px; }
+            .number-block { width: 220px; font-size: 76px; }
         }
 
         @media (min-width: 2560px) {
-            .logo-icon { max-width: 280px; }
-            .logo-text { font-size: 88px; }
-            .prize-text { font-size: 48px; padding: 28px 70px; }
-            .stat-value { font-size: 88px; }
-            .roulette-container { height: 380px; }
-            .number-block { width: 260px; font-size: 112px; }
-            .timer-title { font-size: 140px; }
-            .timer-display { font-size: 520px; height: 580px; }
-            .modal-winner { font-size: 400px; }
-            .modal-title { font-size: 96px; }
-            .modal-subtitle { font-size: 68px; }
-            .controls { right: 40px; max-width: 320px; }
+            .main-title { font-size: 140px; }
+            .company-name { font-size: 88px; }
+            .prize-text { font-size: 48px; padding: 20px 60px; }
+            .roulette-container { height: 480px; }
+            .number-block { width: 300px; font-size: 140px; }
+            .timer-display { font-size: 600px; height: 640px; }
+            .modal-winner { font-size: 450px; }
+            .modal-title { font-size: 110px; }
+            .modal-subtitle { font-size: 72px; }
+            .controls { right: 40px; max-width: 320px; opacity: 0.15; }
             .control-title { font-size: 14px; }
             .btn { font-size: 13px; padding: 8px 16px; }
             footer { font-size: 16px; }
@@ -579,23 +614,13 @@
 <body>
     <div class="container">
         <header>
-            <div class="logo">
-                <div class="logo-icon">🏆</div>
-                <div class="logo-text">Стандартпласт</div>
-                <div class="prize-text">Главный приз: шумоизоляция дверей автомобиля</div>
-            </div>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <div>УЧАСТНИКОВ</div>
-                    <div class="stat-value" id="participantsCount">250</div>
-                </div>
-            </div>
+            <div class="main-title">РОЗЫГРЫШ</div>
+            <div class="company-name">StP СТАНДАРТПЛАСТ</div>
+            <div class="prize-text">Главный приз: шумоизоляция дверей автомобиля</div>
         </header>
 
         <div class="timer-container" id="timerContainer">
-            <div class="timer-title">ДО ОКОНЧАНИЯ РОЗЫГРЫША</div>
-            <div class="timer-display" id="timer">10</div>
+            <div class="timer-display" id="timer">15</div>
         </div>
 
         <div class="roulette-container">
@@ -603,9 +628,9 @@
             <div class="roulette-pointer"></div>
         </div>
         
-        <div class="winner-info" id="winnerInfo">
-            <div class="winner-number">Победитель: <span id="winnerNumber">-</span></div>
-            <div class="winner-text">Участник №<span id="winnerId">-</span> выиграл шумоизоляцию дверей автомобиля</div>
+
+        <div class="winners-panel">
+            <div class="winners-title">🏆 Победители</div>
         </div>
 
         <div class="controls">
@@ -657,50 +682,62 @@
             const rouletteStrip = document.getElementById('rouletteStrip');
             const spinBtn = document.getElementById('spinBtn');
             const stopBtn = document.getElementById('stopBtn');
-            const updateBtn = document.getElementById('updateBtn');
-            const addBtn = document.getElementById('addBtn');
-            const removeBtn = document.getElementById('removeBtn');
-            const participantsInput = document.getElementById('participantsInput');
-            const participantsCount = document.getElementById('participantsCount');
-            const timerDisplay = document.getElementById('timer');
+             const updateBtn = document.getElementById('updateBtn');
+             const addBtn = document.getElementById('addBtn');
+             const removeBtn = document.getElementById('removeBtn');
+             const participantsInput = document.getElementById('participantsInput');
+             const timerDisplay = document.getElementById('timer');
             const timerContainer = document.getElementById('timerContainer');
             const winnerModal = document.getElementById('winnerModal');
             const modalWinnerNumber = document.getElementById('modalWinnerNumber');
             const modalWinnerId = document.getElementById('modalWinnerId');
-            const closeModalBtn = document.getElementById('closeModalBtn');
-            const winnerInfo = document.getElementById('winnerInfo');
-            const winnerNumber = document.getElementById('winnerNumber');
-            const winnerId = document.getElementById('winnerId');
-            const fullscreenBtn = document.getElementById('fullscreenBtn');
-            const winSound = document.getElementById('winSound');
+             const closeModalBtn = document.getElementById('closeModalBtn');
+             const fullscreenBtn = document.getElementById('fullscreenBtn');
+             const winSound = document.getElementById('winSound');
+             const winnersPanel = document.querySelector('.winners-panel');
             
-            let participants = 250;
-            let isSpinning = false;
-            let animationId = null;
-            let timerId = null;
-            let spinStartTime = 0;
-            const spinDuration = 10000;
-            const blockWidth = window.innerWidth < 2560 ? 160 : 260;
-            const speedFactor = 15.0;
-            let winner = null;
-            let timeLeft = 10;
-            let participantNumbers = [];
-            let virtualPosition = 0;
-            let cycleWidth = 0;
-            let totalCycles = 0;
-            let isSlowingDown = false;
+             let participants = 250;
+             let isSpinning = false;
+             let animationId = null;
+             let timerId = null;
+             let spinStartTime = 0;
+             const spinDuration = 15000; // 15 секунд розыгрыша
+             let blockWidth = 200; // Фиксированная ширина блока
+             const speedFactor = 30.0; // В 2 раза быстрее (было 15.0)
+             let winner = null;
+             let timeLeft = 15; // 15 секунд обратного отсчета
+             let participantNumbers = [];
+             let virtualPosition = 0;
+             let cycleWidth = 0;
+             let totalCycles = 0;
+             let isSlowingDown = false;
+             let winners = []; // Массив победителей
+             let roundNumber = 1; // Номер текущего раунда
+             
+             // Адаптивная ширина блока в зависимости от размера экрана
+             function updateBlockWidth() {
+                 if (window.innerWidth >= 2560) {
+                     blockWidth = 300;
+                 } else if (window.innerWidth >= 1920) {
+                     blockWidth = 220;
+                 } else {
+                     blockWidth = 200;
+                 }
+             }
             
-            function initializeRoulette() {
-                rouletteStrip.innerHTML = '';
-                participantsCount.textContent = participants;
-                
-                participantNumbers = Array.from({length: participants}, (_, i) => i + 1);
+             function initializeRoulette() {
+                 updateBlockWidth(); // Обновляем ширину блока
+                 rouletteStrip.innerHTML = '';
+                 
+                 participantNumbers = Array.from({length: participants}, (_, i) => i + 1);
                 shuffleArray(participantNumbers);
                 
-                const maxElements = 1500;
-                const neededForDistance = Math.ceil(25000 / (participants * blockWidth));
-                const maxForPerformance = Math.ceil(maxElements / participants);
-                totalCycles = Math.min(Math.max(neededForDistance, 15), maxForPerformance);
+                // ИСПРАВЛЕНО: Гарантируем минимум 20 циклов для плавности
+                const minCycles = 20;
+                const maxCycles = Math.ceil(3000 / participants); // Максимум элементов для производительности
+                totalCycles = Math.max(minCycles, Math.min(maxCycles, 30));
+                
+                console.log('Participants:', participants, 'Cycles:', totalCycles, 'Total elements:', participants * totalCycles);
                 
                 const fragment = document.createDocumentFragment();
                 for (let i = 0; i < totalCycles; i++) {
@@ -714,10 +751,11 @@
                 }
                 rouletteStrip.appendChild(fragment);
                 
-                cycleWidth = participants * blockWidth;
-                virtualPosition = cycleWidth * 3;
-                winnerInfo.style.display = 'none';
-                updateRoulettePosition();
+                 cycleWidth = participants * blockWidth;
+                 virtualPosition = cycleWidth * 2; // Начинаем с 2 цикла вместо 3
+                 updateRoulettePosition();
+                
+                console.log('Cycle width:', cycleWidth, 'Initial position:', virtualPosition, 'Total width:', cycleWidth * totalCycles);
             }
             
             function shuffleArray(array) {
@@ -728,8 +766,10 @@
             }
             
             function updateRoulettePosition() {
-                if (!isSlowingDown && virtualPosition > cycleWidth * (totalCycles - 8)) {
-                    virtualPosition -= cycleWidth * 4;
+                // Умная перемотка: если приближаемся к концу, плавно перескакиваем назад
+                if (!isSlowingDown && virtualPosition > cycleWidth * (totalCycles - 6)) {
+                    virtualPosition -= cycleWidth * Math.floor(totalCycles / 2);
+                    console.log('Rewinding to position:', virtualPosition);
                 }
                 rouletteStrip.style.transform = `translateX(${-virtualPosition}px)`;
             }
@@ -739,11 +779,10 @@
                 
                 isSpinning = true;
                 spinBtn.disabled = true;
-                winner = null;
-                timeLeft = 10;
-                timerDisplay.textContent = timeLeft;
-                winnerInfo.style.display = 'none';
-                isSlowingDown = false;
+                 winner = null;
+                 timeLeft = 15;
+                 timerDisplay.textContent = timeLeft;
+                 isSlowingDown = false;
                 
                 document.querySelector('.roulette-container').classList.add('spinning');
                 document.querySelectorAll('.number-block.highlight').forEach(el => {
@@ -753,30 +792,37 @@
                 spinStartTime = Date.now();
                 startTimer();
                 
-                function animate() {
-                    if (!isSpinning) return;
-                    
-                    const elapsed = Date.now() - spinStartTime;
-                    const progress = Math.min(elapsed / spinDuration, 1);
-                    
-                    let speed = speedFactor;
-                    if (progress > 0.8) {
-                        isSlowingDown = true;
-                        speed = speedFactor * (1 - (progress - 0.8) / 0.2);
-                    } else {
-                        isSlowingDown = false;
-                    }
-                    
-                    virtualPosition += speed;
-                    updateRoulettePosition();
-                    
-                    if (elapsed >= spinDuration) {
-                        stopSpinning();
-                        return;
-                    }
-                    
-                    animationId = requestAnimationFrame(animate);
-                }
+                 function animate() {
+                     if (!isSpinning) return;
+                     
+                     const elapsed = Date.now() - spinStartTime;
+                     const progress = Math.min(elapsed / spinDuration, 1);
+                     
+                     let speed = speedFactor;
+                     
+                     // Более драматичное замедление для создания интриги
+                     if (progress > 0.7) {
+                         isSlowingDown = true;
+                         // Замедление начинается раньше (70% вместо 80%)
+                         const slowdownProgress = (progress - 0.7) / 0.3;
+                         // Более агрессивное замедление
+                         speed = speedFactor * Math.pow(1 - slowdownProgress, 3);
+                         // Минимальная скорость для эффекта "ползучести"
+                         speed = Math.max(speed, 0.2);
+                     } else {
+                         isSlowingDown = false;
+                     }
+                     
+                     virtualPosition += speed;
+                     updateRoulettePosition();
+                     
+                     if (elapsed >= spinDuration) {
+                         stopSpinning();
+                         return;
+                     }
+                     
+                     animationId = requestAnimationFrame(animate);
+                 }
                 
                 animate();
             }
@@ -851,23 +897,21 @@
                     modalWinnerId.textContent = winner;
                     winnerModal.classList.add('active');
                     
-                    winSound.currentTime = 0;
-                    winSound.play().catch(err => {
-                        console.log('Автовоспроизведение заблокировано:', err);
-                    });
-                    
-                    winnerNumber.textContent = winner;
-                    winnerId.textContent = winner;
-                    winnerInfo.style.display = 'block';
-                    createConfetti();
-                }, 600);
-                
-                const blocks = document.querySelectorAll('.number-block');
-                for (let block of blocks) {
-                    if (parseInt(block.dataset.number) === winner) {
-                        block.classList.add('highlight');
-                    }
-                }
+                     winSound.currentTime = 0;
+                     winSound.play().catch(err => {
+                         console.log('Автовоспроизведение заблокировано:', err);
+                     });
+                     
+                     createConfetti();
+                     addWinnerToList(winner);
+                 }, 600);
+                 
+                 const blocks = document.querySelectorAll('.number-block');
+                 for (let block of blocks) {
+                     if (parseInt(block.dataset.number) === winner) {
+                         block.classList.add('highlight');
+                     }
+                 }
             }
             
             function createConfetti() {
@@ -954,10 +998,50 @@
                 initializeRoulette();
             }
             
-            function closeModal() {
-                winnerModal.classList.remove('active');
-                stopFireworks();
-            }
+             function closeModal() {
+                 winnerModal.classList.remove('active');
+                 stopFireworks();
+             }
+             
+             function addWinnerToList(winnerNumber) {
+                 // Добавляем победителя с номером раунда
+                 const winnerEntry = {
+                     round: roundNumber,
+                     number: winnerNumber
+                 };
+                 
+                 winners.push(winnerEntry); // Добавляем в конец (новые раунды внизу)
+                 
+                 // Ограничиваем количество победителей (максимум 10)
+                 if (winners.length > 10) {
+                     winners = winners.slice(-10); // Оставляем последние 10
+                 }
+                 
+                 updateWinnersPanel();
+                 roundNumber++; // Увеличиваем номер раунда для следующего розыгрыша
+             }
+             
+             function updateWinnersPanel() {
+                 // Удаляем все элементы победителей (кроме заголовка)
+                 const existingItems = winnersPanel.querySelectorAll('.winner-item');
+                 existingItems.forEach(item => item.remove());
+                 
+                 // Если нет победителей, ничего не показываем
+                 if (winners.length === 0) {
+                     return;
+                 }
+                 
+                 // Создаем элементы для каждого победителя
+                 winners.forEach(winner => {
+                     const winnerItem = document.createElement('div');
+                     winnerItem.className = 'winner-item';
+                     winnerItem.innerHTML = `
+                         <span class="winner-text">${winner.round} раунд - №</span>
+                         <span class="winner-number">${winner.number}</span>
+                     `;
+                     winnersPanel.appendChild(winnerItem);
+                 });
+             }
             
             function toggleFullscreen() {
                 if (!document.fullscreenElement) {
@@ -1013,8 +1097,9 @@
             
             participantsInput.addEventListener('change', updateParticipants);
             
-            initializeRoulette();
-            updateFullscreenButton();
+             initializeRoulette();
+             updateFullscreenButton();
+             updateWinnersPanel(); // Инициализируем пустой список победителей
 
             let fireworksIntervalId = null;
             function startFireworks() {
