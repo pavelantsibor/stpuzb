@@ -21,44 +21,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 1vh 2vw;
+            padding: 0.5vh 1vw;
             overflow: hidden;
             position: relative;
-            font-family: 'Arial Black', Arial, sans-serif;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(255, 0, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 0, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(255, 0, 0, 0.03) 2px,
-                    rgba(255, 0, 0, 0.03) 4px
-                );
-            pointer-events: none;
-            z-index: 1;
+            font-family: Arial, sans-serif;
         }
 
         .container {
@@ -86,20 +52,12 @@
         }
 
         .main-title {
-            font-size: clamp(48px, 6vw, 96px);
+            font-size: clamp(32px, 4vw, 64px);
             font-weight: 900;
             color: #ffffff;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-bottom: 0.5vh;
-            text-shadow: 
-                2px 2px 0px #e74c3c,
-                4px 4px 0px #c0392b,
-                6px 6px 0px #a93226,
-                8px 8px 0px #922b21,
-                10px 10px 20px rgba(0, 0, 0, 0.5);
-            position: relative;
-            filter: contrast(1.2) brightness(1.1);
+            margin-bottom: 0.3vh;
+            text-shadow: 2px 2px 0px #e74c3c, 4px 4px 0px #c0392b;
         }
         
 
@@ -125,7 +83,7 @@
 
         .roulette-container {
             width: 100%;
-            height: clamp(240px, 24vh, 450px);
+            height: clamp(288px, 28.8vh, 540px);
             position: relative;
             margin: clamp(10px, 2vh, 30px) 0;
             background: linear-gradient(135deg, #1a1a1a 0%, #2a0000 100%);
@@ -187,26 +145,8 @@
         .number-block.highlight {
             background: linear-gradient(135deg, #ffd700 0%, #ffaa00 50%, #ff8800 100%);
             transform: scale(1.08);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 1),
-                        0 0 80px rgba(255, 170, 0, 0.8),
-                        inset 0 0 30px rgba(255, 255, 255, 0.3);
             z-index: 10;
-            animation: highlightPulse 1s ease-in-out infinite;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
-                         0 3px 6px rgba(0, 0, 0, 0.7);
-        }
-        
-        @keyframes highlightPulse {
-            0%, 100% {
-                box-shadow: 0 0 40px rgba(255, 215, 0, 1),
-                            0 0 80px rgba(255, 170, 0, 0.8),
-                            inset 0 0 30px rgba(255, 255, 255, 0.3);
-            }
-            50% {
-                box-shadow: 0 0 60px rgba(255, 255, 0, 1),
-                            0 0 120px rgba(255, 200, 0, 1),
-                            inset 0 0 50px rgba(255, 255, 255, 0.5);
-            }
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
         }
 
         .roulette-pointer {
@@ -243,15 +183,15 @@
         .controls {
             position: fixed;
             top: 50%;
-            right: 20px;
+            right: 10px;
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 5px;
             z-index: 100;
-            opacity: 0.15;
+            opacity: 0.1;
             transition: opacity 0.3s ease;
-            max-width: 280px;
+            max-width: 120px;
         }
         
         .controls:hover {
@@ -259,79 +199,64 @@
         }
 
         .control-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(42, 0, 0, 0.95) 100%);
-            padding: 12px 14px;
-            border-radius: 8px;
-            border: 1px solid rgba(231, 76, 60, 0.5);
+            background: rgba(26, 26, 26, 0.9);
+            padding: 6px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(231, 76, 60, 0.3);
         }
 
         .control-title {
-            font-size: 11px;
+            font-size: 8px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 4px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .participants-control {
             display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 6px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 3px;
+            margin-bottom: 4px;
             color: #ffffff;
-            font-size: 10px;
+            font-size: 8px;
         }
 
         .participants-control input {
-            width: 60px;
-            padding: 4px 8px;
-            font-size: 11px;
-            border: 1px solid rgba(231, 76, 60, 0.5);
-            border-radius: 4px;
+            width: 50px;
+            padding: 2px 4px;
+            font-size: 8px;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: 2px;
             text-align: center;
             background: rgba(42, 42, 42, 0.8);
             color: #ffffff;
         }
 
         .btn {
-            padding: 6px 12px;
-            font-size: 10px;
-            font-weight: 900;
-            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(20,20,20,0.95) 100%);
+            padding: 3px 6px;
+            font-size: 7px;
+            font-weight: bold;
+            background: rgba(0,0,0,0.8);
             color: white;
-            border: 2px solid #e74c3c;
-            border-radius: 6px;
+            border: 1px solid #e74c3c;
+            border-radius: 3px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 4px;
-            position: relative;
-            overflow: hidden;
+            justify-content: center;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
+            margin-bottom: 2px;
         }
 
         .btn:hover {
-            background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
-            transform: translateY(-1px);
-        }
-
-        .btn:active {
-            transform: translateY(0);
+            background: #e74c3c;
         }
 
         .btn:disabled {
-            background: linear-gradient(180deg, rgba(60,60,60,0.8) 0%, rgba(45,45,45,0.8) 100%);
-            border-color: rgba(231,76,60,0.4);
+            background: rgba(60,60,60,0.6);
+            border-color: rgba(231,76,60,0.3);
             opacity: 0.6;
         }
 
@@ -508,15 +433,13 @@
 
         .winners-panel {
             position: fixed;
-            top: 50%;
-            left: 20px;
-            transform: translateY(-50%);
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(42, 0, 0, 0.95) 100%);
-            border-radius: 15px;
-            border: 2px solid rgba(231, 76, 60, 0.3);
-            padding: 20px;
-            max-width: 200px;
-            min-width: 180px;
+            top: 20%;
+            left: 15px;
+            transform: translateY(0);
+            background: transparent;
+            padding: 15px;
+            max-width: 350px;
+            min-width: 300px;
             opacity: 0.7;
             transition: opacity 0.3s ease;
             z-index: 80;
@@ -528,25 +451,24 @@
         }
 
         .winners-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #ffffff;
+            font-size: 32px !important;
+            font-weight: 900 !important;
+            color: #ffffff !important;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 15px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 8px;
+            margin-bottom: 15px !important;
+            text-align: left;
+            letter-spacing: 2px;
+            white-space: nowrap;
         }
 
         .winner-item {
             display: flex;
             align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 12px;
-            color: #ffffff;
+            padding: 8px 0 !important;
+            font-size: 28px !important;
+            color: #ffffff !important;
             justify-content: flex-start;
+            font-weight: 700 !important;
         }
 
         .winner-item:last-child {
@@ -554,15 +476,17 @@
         }
 
         .winner-text {
-            color: #ffffff;
-            font-size: 12px;
-            line-height: 1.2;
+            color: #ffffff !important;
+            font-size: 28px !important;
+            line-height: 1.5;
+            font-weight: 700 !important;
         }
 
         .winner-number {
-            font-weight: 700;
-            color: #ffd700;
-            margin-left: 5px;
+            font-weight: 900 !important;
+            color: #ffd700 !important;
+            margin-left: 8px;
+            font-size: 32px !important;
         }
 
         /* Оптимизация для телевизоров и больших экранов */
@@ -597,7 +521,7 @@
             }
             
             .roulette-container { 
-                height: clamp(120px, 12vh, 200px); 
+                height: clamp(144px, 14.4vh, 240px); 
                 margin: clamp(5px, 1vh, 15px) 0;
             }
             
@@ -618,24 +542,10 @@
             }
             
             .winners-panel {
-                left: clamp(10px, 1.5vw, 20px);
-                max-width: clamp(150px, 15vw, 180px);
-                min-width: clamp(140px, 14vw, 160px);
-                padding: clamp(12px, 1.5vh, 16px);
-            }
-            
-            .winners-title {
-                font-size: clamp(11px, 1.2vw, 14px);
-                margin-bottom: clamp(8px, 1vh, 12px);
-            }
-            
-            .winner-item {
-                padding: clamp(4px, 0.5vh, 6px) 0;
-                font-size: clamp(10px, 1vw, 12px);
-            }
-            
-            .winner-number {
-                font-size: clamp(11px, 1.1vw, 13px);
+                left: 15px;
+                max-width: 350px;
+                min-width: 300px;
+                padding: 15px;
             }
             
             header { 
@@ -649,13 +559,14 @@
             .main-title { font-size: clamp(48px, 3vw, 72px); }
             .company-name { font-size: clamp(24px, 2vw, 40px); }
             .timer-display { font-size: clamp(120px, 8vw, 200px); height: clamp(140px, 10vh, 220px); }
-            .roulette-container { height: clamp(180px, 15vh, 240px); }
+            .roulette-container { height: clamp(216px, 18vh, 288px); }
             .number-block { width: clamp(160px, 10vw, 180px); font-size: clamp(40px, 3vw, 56px); }
             .modal-winner { font-size: clamp(120px, 8vw, 200px); }
             .controls { right: clamp(20px, 2vw, 30px); max-width: clamp(220px, 18vw, 280px); }
             .winners-panel { 
-                left: clamp(15px, 1.5vw, 25px); 
-                max-width: clamp(160px, 12vw, 200px);
+                left: 15px; 
+                max-width: 350px;
+                min-width: 300px;
             }
         }
 
@@ -663,7 +574,7 @@
             .main-title { font-size: 140px; }
             .company-name { font-size: 88px; }
             .prize-text { font-size: 48px; padding: 20px 60px; }
-            .roulette-container { height: 480px; }
+            .roulette-container { height: 576px; }
             .number-block { width: 300px; font-size: 140px; }
             .timer-display { font-size: 600px; height: 640px; }
             .modal-winner { font-size: 450px; }
@@ -699,7 +610,7 @@
         
 
         <div class="winners-panel">
-            <div class="winners-title">🏆 Победители</div>
+            <div class="winners-title">🏆 ПОБЕДИТЕЛИ:</div>
         </div>
 
         <div class="controls">
@@ -801,10 +712,10 @@
                  participantNumbers = Array.from({length: participants}, (_, i) => i + 1);
                 shuffleArray(participantNumbers);
                 
-                 // Оптимизация для телевизоров: уменьшаем количество элементов
-                 const minCycles = window.innerWidth > 1200 ? 15 : 20;
-                 const maxCycles = Math.ceil(window.innerWidth > 1200 ? 2000 / participants : 3000 / participants);
-                 totalCycles = Math.max(minCycles, Math.min(maxCycles, window.innerWidth > 1200 ? 25 : 30));
+                 // Максимальная оптимизация для телевизоров: еще меньше элементов
+                 const minCycles = window.innerWidth > 1200 ? 10 : 15;
+                 const maxCycles = Math.ceil(window.innerWidth > 1200 ? 1500 / participants : 2000 / participants);
+                 totalCycles = Math.max(minCycles, Math.min(maxCycles, window.innerWidth > 1200 ? 20 : 25));
                 
                 console.log('Participants:', participants, 'Cycles:', totalCycles, 'Total elements:', participants * totalCycles);
                 
@@ -986,8 +897,8 @@
              function createConfetti() {
                  const colors = ['#e74c3c', '#ffffff', '#f1c40f', '#ff6b5a'];
                  
-                 // Уменьшаем количество конфетти для телевизоров
-                 const confettiCount = window.innerWidth > 1200 ? 50 : 100;
+                 // Количество конфетти
+                 const confettiCount = 100;
                  
                  for (let i = 0; i < confettiCount; i++) {
                     setTimeout(() => {
@@ -1015,38 +926,6 @@
                     }, i * 20);
                 }
                 
-                 // Уменьшаем количество звезд для телевизоров
-                 const starsCount = window.innerWidth > 1200 ? 20 : 40;
-                 
-                 for (let i = 0; i < starsCount; i++) {
-                    setTimeout(() => {
-                        const star = document.createElement('div');
-                        star.className = 'confetti';
-                        star.style.left = '50vw';
-                        star.style.top = '50vh';
-                        star.style.width = '16px';
-                        star.style.height = '16px';
-                        star.style.backgroundColor = '#ffffff';
-                        star.style.borderRadius = '50%';
-                        star.style.boxShadow = '0 0 20px #ffffff';
-                        document.body.appendChild(star);
-                        
-                        const angle = (Math.PI * 2 * i) / 40;
-                        const distance = Math.random() * 500 + 300;
-                        const endX = Math.cos(angle) * distance;
-                        const endY = Math.sin(angle) * distance;
-                        
-                        const animation = star.animate([
-                            { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
-                            { transform: `translate(calc(-50% + ${endX}px), calc(-50% + ${endY}px)) scale(0)`, opacity: 0 }
-                        ], {
-                            duration: Math.random() * 1200 + 800,
-                            easing: 'cubic-bezier(0, 0.5, 0.5, 1)'
-                        });
-                        
-                        animation.onfinish = () => star.remove();
-                    }, i * 15);
-                }
             }
             
             function updateParticipants() {
@@ -1196,7 +1075,7 @@
                  const cy = Math.random() * window.innerHeight * 0.4 + window.innerHeight * 0.2;
                  const colors = ['#ffffff', '#e74c3c', '#ff6b5a', '#f1c40f'];
                  // Уменьшаем количество частиц фейерверка для телевизоров
-                 const particles = window.innerWidth > 1200 ? 15 : 25;
+                 const particles = window.innerWidth > 1200 ? 8 : 15;
                 for (let i = 0; i < particles; i++) {
                     const p = document.createElement('div');
                     p.className = 'firework-particle';
